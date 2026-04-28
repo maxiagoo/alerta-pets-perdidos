@@ -23,6 +23,8 @@
 | RNF03 | A aplicação deve ser acessível via navegador                    |
 | RNF04 | Os dados devem ser armazenados em banco de dados relacional     |
 | RNF05 | O sistema deve ser executável localmente                        |
+| RNF06 | O sistema deve validar entradas para evitar dados inválidos     |
+| RNF07 | O sistema deve tratar erros de forma amigável ao usuário        |
 
 ## Regras de Negócio
 
@@ -33,4 +35,6 @@
 | RN03 | Foto é obrigatória para geração do cartaz                            |
 | RN04 | Pets encontrados podem ser cadastrados sem vínculo com pets perdidos |
 | RN05 | A busca deve permitir correspondência parcial de texto               |
+| RN06 | Um pet perdido não pode ser cadastrado sem data                      |
+| RN07 | A localização deve conter ao menos cidade                            |
 
