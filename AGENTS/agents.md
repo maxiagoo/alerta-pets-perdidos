@@ -1,4 +1,3 @@
-AGENTS:
 # Agentes de Apoio ao Desenvolvimento
 
 ## 1. Ferramentas Utilizadas (Até o momento)
