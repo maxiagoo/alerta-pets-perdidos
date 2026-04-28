@@ -1,6 +1,7 @@
 # Alerta de Pets Perdidos
 
 Sistema web desenvolvido em Java para auxiliar na divulgação de pets perdidos, permitindo cadastro, busca por região e geração de cartazes digitais para compartilhamento.
+
 ---
 
 ## Sobre o Projeto
@@ -8,6 +9,7 @@ Sistema web desenvolvido em Java para auxiliar na divulgação de pets perdidos,
 Este projeto foi desenvolvido como parte da disciplina de Programação Orientada a Objetos na Fatec Praia Grande.
 
 O objetivo é oferecer uma solução simples e funcional para ajudar na localização de animais perdidos por meio de divulgação digital.
+
 ---
 
 ## Funcionalidades
@@ -18,6 +20,7 @@ O objetivo é oferecer uma solução simples e funcional para ajudar na localiza
 * Filtro por tipo de animal
 * Registro de pets encontrados
 * Geração de cartaz digital (imagem ou PDF)
+
 ---
 
 ## Tecnologias Utilizadas
@@ -26,6 +29,7 @@ O objetivo é oferecer uma solução simples e funcional para ajudar na localiza
 * HTML/CSS
 * Banco de dados relacional
 * Git e GitHub
+
 ---
 
 ## Como Executar (planejado)
@@ -34,11 +38,13 @@ O objetivo é oferecer uma solução simples e funcional para ajudar na localiza
 2. Configurar o ambiente Java
 3. Executar a aplicação localmente
 4. Acessar via navegador
+
 ---
 
 ## Status
 
 Em desenvolvimento
+
 ---
 
 ## Possíveis Melhorias
@@ -47,6 +53,7 @@ Em desenvolvimento
 * Integração com mapas
 * Notificações
 * Compartilhamento direto em redes sociais
+
 ---
 
 ## Autor
