@@ -4,7 +4,7 @@
 ---
 ## 1. Visão Geral
 
-Aplicação web em Java para cadastro e consulta de pets perdidos, com geração de cartazes digitais para divulgação.
+Aplicação web em Java para cadastro e consulta de pets perdidos, com geração de cartazes digitais e prontos para divulgação.
 ---
 ## 2. Arquitetura
 
