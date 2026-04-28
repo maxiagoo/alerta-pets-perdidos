@@ -14,8 +14,6 @@
 | RF04 | O sistema deve gerar um cartaz digital contendo as informações do pet                                            |
 | RF05 | O sistema deve permitir o cadastro de pets encontrados com descrição, localização, data e foto opcional          |
 
----
-
 ## Requisitos Não Funcionais
 
 | ID    | Descrição                                                       |
@@ -25,8 +23,6 @@
 | RNF03 | A aplicação deve ser acessível via navegador                    |
 | RNF04 | Os dados devem ser armazenados em banco de dados relacional     |
 | RNF05 | O sistema deve ser executável localmente                        |
-
----
 
 ## Regras de Negócio
 
