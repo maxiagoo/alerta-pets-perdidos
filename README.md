@@ -1,4 +1,4 @@
-# Alerta de Pets Perdidos (ZooPaw)
+# Alerta de Pets Perdidos
 
 Projeto acadêmico desenvolvido na Fatec Praia Grande na disciplina de Programação Orientada a Objetos.
 
