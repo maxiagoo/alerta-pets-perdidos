@@ -1,6 +1,6 @@
 # Agentes de Apoio ao Desenvolvimento
 
-## 1. Ferramentas Utilizadas
+## 1. Ferramentas Utilizadas até o momento
 
 * ChatGPT (OpenAI)
 * Gemini (Google)
