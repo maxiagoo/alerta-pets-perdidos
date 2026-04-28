@@ -78,11 +78,15 @@ O sistema seguirá o padrão MVC:
 ## 7. Persistência
 
 Dados armazenados em banco relacional com operações CRUD.
+
 ---
+
 ## 8. Interface
 
 Interface web simples com telas de cadastro, listagem, busca e geração de cartaz.
+
 ---
+
 ## 9. Restrições
 
 * Sem autenticação de usuários
