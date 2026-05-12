@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pets Perdidos</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Pets Perdidos</h1>
+</header>
+
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="cadastro.html">Cadastrar Pet</a>
+    <a href="pets.html">Pets Perdidos</a>
+</nav>
+
+<section class="banner">
+
+    <h2>Animais cadastrados</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Thor</h3>
+            <p>Cachorro - Labrador</p>
+            <button>Entrar em contato</button>
+        </div>
+
+        <div class="card">
+            <h3>Luna</h3>
+            <p>Gata - Siamês</p>
+            <button>Entrar em contato</button>
+        </div>
+
+        <div class="card">
+            <h3>Mel</h3>
+            <p>Cachorra - Pinscher</p>
+            <button>Entrar em contato</button>
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>
