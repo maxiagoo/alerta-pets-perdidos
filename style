@@ -15,11 +15,18 @@ header {
     align-items: center;
 }
 
-nav a {
-    color: white;
-    text-decoration: none;
+nav{
+    background-color:#333;
+    padding:10px;
+    text-align:center;
+}
 
-    margin-left: 15px;
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:15px;
+    font-weight:bold;
+
 }
 .busca {
 
@@ -99,4 +106,55 @@ nav a {
 .card:hover {
 
     transform: scale(1.03);
+}
+
+input,
+textarea{
+    width:90%;
+    padding:10px;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+
+textarea{
+    height:100px;
+}
+
+form{
+    width:100%;
+}
+
+input,
+textarea{
+    width:90%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:15px;
+}
+
+textarea{
+    height:120px;
+    resize:none;
+}
+
+.card{
+    background-color:white;
+    padding:30px;
+    width:400px;
+    border-radius:10px;
+    box-shadow:0px 0px 10px rgba(0,0,0,0.2);
+    text-align:center;
+}
+
+.card button{
+    width:95%;
+    padding:12px;
+    font-size:16px;
+    transition:0.3s;
+}
+
+.card button:hover{
+    background-color:#e6762f;
 }
