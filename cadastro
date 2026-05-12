@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Pet</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Cadastro de Pet Perdido</h1>
+</header>
+
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="cadastro.html">Cadastrar Pet</a>
+</nav>
+
+<section class="banner">
+
+    <h2>Preencha os dados do animal</h2>
+
+    <div class="card">
+
+        <h2>Registrar Pet</h2>
+
+        <form>
+
+            <p>
+                <input type="text" placeholder="Nome do pet">
+            </p>
+
+            <p>
+                <input type="text" placeholder="Espécie">
+            </p>
+
+            <p>
+                <input type="text" placeholder="Raça">
+            </p>
+
+            <p>
+                <input type="text" placeholder="Telefone">
+            </p>
+
+            <p>
+                <textarea placeholder="Descrição"></textarea>
+            </p>
+
+            <p>
+                <button type="submit">
+                    Cadastrar
+                </button>
+            </p>
+
+        </form>
+
+    </div>
+
+</section>
+
+</body>
