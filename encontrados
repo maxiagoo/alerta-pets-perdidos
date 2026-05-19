@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pets Encontrados</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <header>
+
+    <h1>🐾 Alerta de Pets Perdidos</h1>
+
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="cadastro.html">Cadastrar Pet</a>
+        <a href="pets.html">Pets Perdidos</a>
+        <a href="encontrados.html">Pets Encontrados</a>
+    </nav>
+
+</header>
+
+    <main>
+
+        <section class="busca">
+            <input type="text" placeholder="Buscar por região...">
+        </section>
+
+        <section class="cards-container">
+
+            <div class="card-pet">
+                <img src="../img/pet1.jpg" alt="Pet Encontrado">
+
+                <h2>Thor</h2>
+
+                <p><strong>Região:</strong> Sorocaba</p>
+
+                <p>
+                    Cachorro encontrado próximo ao centro.
+                </p>
+
+                <button>Entrar em Contato</button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="../js/script.js"></script>
+
+</body>
+</html>
