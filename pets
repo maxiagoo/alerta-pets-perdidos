@@ -28,20 +28,31 @@
 
         <div class="card">
             <h3>Thor</h3>
+            <img src="../img/cachorro1.jpg.jfif" alt="Thor">
             <p>Cachorro - Labrador</p>
-            <button>Entrar em contato</button>
+            <a href="https://wa.me/5513999999999" target="_blank">
+             <button>Entrar em contato</button>
+</a>
         </div>
 
         <div class="card">
             <h3>Luna</h3>
+            <img src="../img/gato1.jpg.jfif" alt="Luna">
             <p>Gata - Siamês</p>
+            <a href="https://wa.me/5513999999999" target="_blank">
             <button>Entrar em contato</button>
+</a>
+        
         </div>
 
         <div class="card">
             <h3>Mel</h3>
+            <img src="../img/cachorro2.jpg.jfif" alt="Mel">
             <p>Cachorra - Pinscher</p>
+            <a href="https://wa.me/5513999999999" target="_blank">
             <button>Entrar em contato</button>
+            </a>
+
         </div>
 
     </div>
