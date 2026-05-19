@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de Pet</title>
+    <title>Cadastrar Pet</title>
 
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -11,54 +11,44 @@
 <body>
 
 <header>
-    <h1>Cadastro de Pet Perdido</h1>
+    <h1>Cadastro de Pets</h1>
 </header>
 
 <nav>
     <a href="../index.html">Home</a>
     <a href="cadastro.html">Cadastrar Pet</a>
+    <a href="pets.html">Pets Perdidos</a>
 </nav>
 
 <section class="banner">
 
-    <h2>Preencha os dados do animal</h2>
-
     <div class="card">
 
-        <h2>Registrar Pet</h2>
+        <h2>Cadastrar Animal</h2>
 
         <form>
 
-            <p>
-                <input type="text" placeholder="Nome do pet">
-            </p>
+            <input type="text" placeholder="Nome do pet">
 
-            <p>
-                <input type="text" placeholder="Espécie">
-            </p>
+            <input type="text" placeholder="Raça">
 
-            <p>
-                <input type="text" placeholder="Raça">
-            </p>
+            <input type="text" placeholder="Telefone para contato">
 
-            <p>
-                <input type="text" placeholder="Telefone">
-            </p>
+            <textarea placeholder="Descrição do desaparecimento"></textarea>
 
-            <p>
-                <textarea placeholder="Descrição"></textarea>
-            </p>
+            <input type="file">
 
-            <p>
-                <button type="submit">
-                    Cadastrar
-                </button>
-            </p>
+            <br><br>
+
+            <button type="submit">
+                Cadastrar Pet
+            </button>
 
         </form>
 
     </div>
 
 </section>
-
+    <script src="../js/script.js"></script>
 </body>
+</html>
