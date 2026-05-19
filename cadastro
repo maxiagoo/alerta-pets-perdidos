@@ -11,14 +11,17 @@
 <body>
 
 <header>
-    <h1>Cadastro de Pets</h1>
-</header>
 
-<nav>
-    <a href="../index.html">Home</a>
-    <a href="cadastro.html">Cadastrar Pet</a>
-    <a href="pets.html">Pets Perdidos</a>
-</nav>
+    <h1>🐾 Alerta de Pets Perdidos</h1>
+
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="cadastro.html">Cadastrar Pet</a>
+        <a href="pets.html">Pets Perdidos</a>
+        <a href="encontrados.html">Pets Encontrados</a>
+    </nav>
+
+</header>
 
 <section class="banner">
 
