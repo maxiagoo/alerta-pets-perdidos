@@ -11,17 +11,14 @@
 <body>
 
 <header>
-
-    <h1>🐾 Alerta de Pets Perdidos</h1>
-
-    <nav>
-        <a href="../index.html">Home</a>
-        <a href="cadastro.html">Cadastrar Pet</a>
-        <a href="pets.html">Pets Perdidos</a>
-        <a href="encontrados.html">Pets Encontrados</a>
-    </nav>
-
+    <h1>Cadastro de Pets</h1>
 </header>
+
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="cadastro.html">Cadastrar Pet</a>
+    <a href="pets.html">Pets Perdidos</a>
+</nav>
 
 <section class="banner">
 
@@ -29,17 +26,36 @@
 
         <h2>Cadastrar Animal</h2>
 
-        <form>
+        <form id="formPet">
 
-            <input type="text" placeholder="Nome do pet">
+            <input 
+                type="text" 
+                id="nome" 
+                placeholder="Nome do pet"
+            >
 
-            <input type="text" placeholder="Raça">
+            <input 
+                type="text" 
+                id="raca" 
+                placeholder="Raça"
+            >
 
-            <input type="text" placeholder="Telefone para contato">
+            <input 
+                type="text" 
+                id="telefone" 
+                placeholder="Telefone para contato"
+            >
 
-            <textarea placeholder="Descrição do desaparecimento"></textarea>
+            <textarea 
+                id="descricao" 
+                placeholder="Descrição do desaparecimento"
+            ></textarea>
 
-            <input type="file">
+            <input 
+                type="file" 
+                id="foto"
+                accept="image/*"
+            >
 
             <br><br>
 
@@ -52,6 +68,8 @@
     </div>
 
 </section>
-    <script src="../js/script.js"></script>
+
+<script src="../js/script.js"></script>
+
 </body>
 </html>
