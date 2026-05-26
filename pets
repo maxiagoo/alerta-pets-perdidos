@@ -11,56 +11,32 @@
 <body>
 
 <header>
-
-    <h1>🐾 Alerta de Pets Perdidos</h1>
-
-    <nav>
-        <a href="../index.html">Home</a>
-        <a href="cadastro.html">Cadastrar Pet</a>
-        <a href="pets.html">Pets Perdidos</a>
-        <a href="encontrados.html">Pets Encontrados</a>
-    </nav>
-
+    <h1>Pets Perdidos</h1>
 </header>
+
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="cadastro.html">Cadastrar Pet</a>
+    <a href="pets.html">Pets Perdidos</a>
+</nav>
 
 <section class="banner">
 
-    <h2>Animais cadastrados</h2>
+    <div>
+        <h2>Animais cadastrados</h2>
+    </div>
 
     <div class="cards">
-
-        <div class="card">
-            <h3>Thor</h3>
-            <img src="../img/cachorro1.jpg.jfif" alt="Thor">
-            <p>Cachorro - Labrador</p>
-            <a href="https://wa.me/5513999999999" target="_blank">
-             <button>Entrar em contato</button>
-</a>
-        </div>
-
-        <div class="card">
-            <h3>Luna</h3>
-            <img src="../img/gato1.jpg.jfif" alt="Luna">
-            <p>Gata - Siamês</p>
-            <a href="https://wa.me/5513999999999" target="_blank">
-            <button>Entrar em contato</button>
-</a>
-        
-        </div>
-
-        <div class="card">
-            <h3>Mel</h3>
-            <img src="../img/cachorro2.jpg.jfif" alt="Mel">
-            <p>Cachorra - Pinscher</p>
-            <a href="https://wa.me/5513999999999" target="_blank">
-            <button>Entrar em contato</button>
-            </a>
-
-        </div>
 
     </div>
 
 </section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="../js/script.js"></script>
 
 </body>
 </html>
