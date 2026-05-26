@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Alerta de Pets Perdidos</title>
+
+    <!-- 🔥 FONTE PROFISSIONAL -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        body{
+            margin:0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(180deg, #f4f4f4, #e9e9e9);
+        }
+
+        header{
+            background: linear-gradient(135deg, #ff914d, #ff6b2c);
+            color:white;
+            padding:25px;
+            text-align:center;
+            font-size:18px;
+            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 🔥 TÍTULO PRINCIPAL DO HEADER */
+        header h1{
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        nav{
+            background-color:#222;
+            padding:12px;
+            text-align:center;
+            position:sticky;
+            top:0;
+        }
+
+        nav a{
+            color:white;
+            text-decoration:none;
+            margin:15px;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        nav a:hover{
+            color:#ff914d;
+        }
+
+        /* ================= HERO ================= */
+
+        .banner{
+            padding:80px 20px;
+            text-align:center;
+            background: white;
+        }
+
+        .banner h1{
+            color:#ff6b2c;
+            font-size:36px;
+
+            /* 🔥 FONTE MODERNA */
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+
+            margin-bottom:10px;
+        }
+
+        .banner p{
+            color:#555;
+            font-size:18px;
+        }
+
+        /* ================= CARDS ================= */
+
+        .cards{
+            display:flex;
+            justify-content:center;
+            gap:25px;
+            margin-top:50px;
+            flex-wrap:wrap;
+        }
+
+        .card{
+            background:white;
+            padding:25px;
+            width:260px;
+            border-radius:15px;
+            box-shadow:0 8px 20px rgba(0,0,0,0.08);
+            text-align:center;
+            transition:0.3s;
+        }
+
+        .card:hover{
+            transform:translateY(-5px);
+        }
+
+        .card h3{
+            color:#ff6b2c;
+
+            /* 🔥 FONTE MAIS BONITA NOS TÍTULOS DOS CARDS */
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+
+            margin-bottom:10px;
+        }
+
+        .card p{
+            color:#555;
+            font-size:15px;
+        }
+
+        /* ================= BOTÕES ================= */
+
+        .card button{
+            margin-top:15px;
+            background: linear-gradient(135deg, #ff914d, #ff6b2c);
+            color:white;
+            border:none;
+            padding:12px 18px;
+            border-radius:8px;
+            cursor:pointer;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        .card button:hover{
+            transform:scale(1.05);
+        }
+
+        /* ================= RESPONSIVO ================= */
+
+        @media(max-width: 768px){
+            .cards{
+                flex-direction:column;
+                align-items:center;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🐾ZOOPAW🐾</h1>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="pages/cadastro.html">Cadastrar Pet</a>
+    <a href="pages/pets.html">Pets Perdidos</a>
+</nav>
+
+<section class="banner">
+
+    <h1>Ajude um pet a voltar para casa 🐶</h1>
+
+    <p>Sistema de divulgação de animais desaparecidos com busca por região e contato direto.</p>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>🐾 Perdi meu pet</h3>
+            <p>Cadastre o animal desaparecido e aumente as chances de encontrá-lo.</p>
+
+            <a href="pages/cadastro.html">
+                <button>Registrar</button>
+            </a>
+        </div>
+
+        <div class="card">
+            <h3>📍 Encontrei um pet</h3>
+            <p>Ajude a localizar o dono rapidamente usando o sistema.</p>
+
+            <a href="pages/pets.html">
+                <button>Ver Pets</button>
+            </a>
+        </div>
+
+        <div class="card">
+            <h3>⚡ Busca rápida</h3>
+            <p>Filtre pets por cidade e encontre mais rápido.</p>
+
+            <a href="pages/pets.html">
+                <button>Buscar</button>
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

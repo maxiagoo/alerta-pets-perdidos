@@ -1,8 +1,12 @@
 body{
     margin:0;
-    font-family:Arial, sans-serif;
-    background-color:#f4f4f4;
+    font-family:'Poppins', sans-serif;
+    background: linear-gradient(180deg, #f4f4f4, #e9e9e9);
 }
+
+/* ========================= */
+/* HEADER */
+/* ========================= */
 
 header{
     background-color:rgb(71, 61, 204);
@@ -10,6 +14,10 @@ header{
     padding:20px;
     text-align:center;
 }
+
+/* ========================= */
+/* NAV */
+/* ========================= */
 
 nav{
     background-color:#333;
@@ -24,10 +32,23 @@ nav a{
     font-weight:bold;
 }
 
-.banner{
-    padding:40px;
-    text-align:center;
+/* ========================= */
+/* CENTRALIZAÇÃO (SÓ CADASTRO) */
+/* ========================= */
+
+.container{
+    min-height: calc(100vh - 140px);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:30px;
 }
+
+/* ========================= */
+/* LISTA DE PETS */
+/* ========================= */
 
 .cards{
     display:flex;
@@ -75,10 +96,28 @@ nav a{
     background-color:#e6762f;
 }
 
+/* ========================= */
+/* FORMULÁRIO (CADASTRO) */
+/* ========================= */
+
 form{
     width:100%;
 }
 
+/* CARD DO CADASTRO */
+.banner .card{
+    width:400px;
+    padding:25px;
+    background-color:white;
+    border-radius:12px;
+    box-shadow:0px 4px 15px rgba(0,0,0,0.2);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+/* INPUTS */
 input,
 textarea{
     width:100%;
@@ -98,6 +137,7 @@ input[type="file"]{
     background-color:white;
 }
 
+/* BOTÕES */
 button{
     background-color:#ff914d;
     color:white;
@@ -106,6 +146,8 @@ button{
     border-radius:8px;
     font-size:16px;
     cursor:pointer;
+    width:100%;
+    margin-top:15px;
 }
 
 button:hover{
