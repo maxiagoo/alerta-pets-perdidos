@@ -26,7 +26,7 @@
         <h2>Animais cadastrados</h2>
     </div>
 
-    <!-- 🔎 NOVO: BUSCA POR CIDADE -->
+    <!-- BUSCA -->
     <div style="margin-bottom: 20px;">
         <input 
             type="text" 
@@ -35,17 +35,25 @@
         >
     </div>
 
-    <!-- LISTA DE PETS -->
+    <!-- LISTA -->
     <div class="cards"></div>
 
 </section>
 
-<!-- libs -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<!-- LIBS (ORDENADO CORRETAMENTE) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<!-- seu JS -->
+<!-- SEU JS (APENAS UMA VEZ) -->
 <script src="../js/script.js"></script>
+
+<!-- PROTEÇÃO -->
+<script>
+    window.onload = function () {
+        if (typeof protegerPagina === "function") {
+            protegerPagina();
+        }
+    };
+</script>
 
 </body>
 </html>

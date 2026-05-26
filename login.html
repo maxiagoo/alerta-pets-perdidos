@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Alerta de Pets</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+            background: linear-gradient(135deg, #ff7a18, #af002d);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            width: 350px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .login-container h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 10px;
+            background: #ff4d4d;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #e63c3c;
+        }
+
+        .toggle {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .toggle span {
+            color: #ff4d4d;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <h1 id="tituloForm">Login</h1>
+
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="senha" placeholder="Senha">
+
+    <button onclick="acao()">Entrar</button>
+
+    <div class="toggle" onclick="alternar()">
+        Não tem conta? <span>Cadastrar</span>
+    </div>
+
+</div>
+
+<script>
+    let modo = "login";
+
+    function alternar() {
+        let titulo = document.getElementById("tituloForm");
+        let botao = document.querySelector("button");
+        let toggle = document.querySelector(".toggle");
+
+        if (modo === "login") {
+            modo = "cadastro";
+            titulo.innerText = "Cadastro";
+            botao.innerText = "Cadastrar";
+            toggle.innerHTML = "Já tem conta? <span>Entrar</span>";
+        } else {
+            modo = "login";
+            titulo.innerText = "Login";
+            botao.innerText = "Entrar";
+            toggle.innerHTML = "Não tem conta? <span>Cadastrar</span>";
+        }
+    }
+
+    function acao() {
+        let email = document.getElementById("email").value;
+        let senha = document.getElementById("senha").value;
+
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+
+        if (modo === "cadastro") {
+            let existe = users.find(u => u.email === email);
+
+            if (existe) {
+                alert("Usuário já existe!");
+                return;
+            }
+
+            users.push({ email, senha });
+            localStorage.setItem("users", JSON.stringify(users));
+
+            alert("Cadastro realizado com sucesso!");
+            alternar();
+
+        } else {
+            let user = users.find(u => u.email === email && u.senha === senha);
+
+            if (!user) {
+                alert("Email ou senha inválidos!");
+                return;
+            }
+
+            localStorage.setItem("currentUser", JSON.stringify({ email }));
+
+            alert("Login feito com sucesso!");
+            window.location.href = "index.html";
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,3 +1,23 @@
+// ===============================
+// USUÁRIO LOGADO
+// ===============================
+function getUserLogado() {
+    return JSON.parse(localStorage.getItem("currentUser"));
+}
+
+function protegerPagina() {
+    const user = getUserLogado();
+
+    if (!user) {
+        alert("Você precisa criar uma conta ou fazer login!");
+        window.location.href = "login.html";
+    }
+}
+
+
+// ===============================
+// CLASSE PET
+// ===============================
 class Pet {
 
     constructor(nome, raca, telefone, descricao, foto, cidade, bairro, dataPerda){
@@ -11,8 +31,9 @@ class Pet {
         this.cidade = cidade;
         this.bairro = bairro;
 
-        // NOVO
         this.dataPerda = dataPerda;
+
+        this.usuario = getUserLogado()?.email || "anonimo";
     }
 }
 
@@ -28,6 +49,12 @@ if(formulario){
 
         event.preventDefault();
 
+        if(!getUserLogado()){
+            alert("Você precisa estar logado para cadastrar um pet!");
+            window.location.href = "login.html";
+            return;
+        }
+
         const nome = document.querySelector("#nome").value;
         const raca = document.querySelector("#raca").value;
         const telefone = document.querySelector("#telefone").value;
@@ -36,7 +63,6 @@ if(formulario){
         const cidade = document.querySelector("#cidade").value;
         const bairro = document.querySelector("#bairro").value;
 
-        // NOVO CAMPO
         const dataPerda = document.querySelector("#dataPerda").value;
 
         const arquivoFoto = document.querySelector("#foto").files[0];
@@ -88,7 +114,7 @@ if(formulario){
 
 
 // ===============================
-// LISTA NORMAL
+// LISTA
 // ===============================
 const lista = document.querySelector(".cards");
 
@@ -102,16 +128,20 @@ function mostrarPets(){
 
     const pets = JSON.parse(localStorage.getItem("pets")) || [];
 
+    const user = getUserLogado();
+
+    const meusPets = pets.filter(pet => pet.usuario === user?.email);
+
     container.innerHTML = "";
 
-    pets.forEach(function(pet, index){
+    meusPets.forEach(function(pet, index){
         container.innerHTML += renderCard(pet, index);
     });
 }
 
 
 // ===============================
-// BUSCA POR CIDADE
+// BUSCA
 // ===============================
 const inputBusca = document.querySelector("#buscaCidade");
 
@@ -119,7 +149,10 @@ if(inputBusca){
 
     inputBusca.addEventListener("input", function(){
 
-        const pets = JSON.parse(localStorage.getItem("pets")) || [];
+        const user = getUserLogado();
+
+        const pets = (JSON.parse(localStorage.getItem("pets")) || [])
+            .filter(pet => pet.usuario === user?.email);
 
         const filtrados = pets.filter(pet =>
             (pet.cidade || "")
@@ -127,47 +160,14 @@ if(inputBusca){
             .includes(this.value.toLowerCase())
         );
 
-        if(filtrados.length === 0){
-            mostrarMensagemVazia();
-        } else {
-            mostrarFiltrados(filtrados);
-        }
+        const container = document.querySelector(".cards");
+
+        container.innerHTML = filtrados.length
+            ? filtrados.map(renderCard).join("")
+            : `<div style="text-align:center;padding:40px;color:#666;">
+                Nenhum resultado encontrado 🐾
+              </div>`;
     });
-}
-
-
-// ===============================
-// RENDER FILTRADO
-// ===============================
-function mostrarFiltrados(listaPets){
-
-    const container = document.querySelector(".cards");
-
-    container.innerHTML = "";
-
-    listaPets.forEach(function(pet, index){
-        container.innerHTML += renderCard(pet, index);
-    });
-}
-
-
-// ===============================
-// MENSAGEM VAZIA
-// ===============================
-function mostrarMensagemVazia(){
-
-    const container = document.querySelector(".cards");
-
-    container.innerHTML = `
-        <div style="
-            text-align:center;
-            padding:40px;
-            font-size:20px;
-            color:#666;
-        ">
-            Nenhum resultado encontrado 🐾
-        </div>
-    `;
 }
 
 
@@ -197,15 +197,11 @@ function renderCard(pet, index){
 
             <br><br>
 
-            <button onclick="gerarPDF(${index})">
-                Gerar Cartaz PDF
-            </button>
+            <button onclick="gerarPDF(${index})">Gerar Cartaz PDF</button>
 
             <br><br>
 
-            <button onclick="removerPet(${index})">
-                Remover Pet
-            </button>
+            <button onclick="removerPet(${index})">Remover Pet</button>
 
         </div>
     `;
@@ -213,17 +209,25 @@ function renderCard(pet, index){
 
 
 // ===============================
-// PDF (COM DATA)
+// PDF (CORRIGIDO DE VERDADE)
 // ===============================
 function gerarPDF(index){
 
-    const pets = JSON.parse(localStorage.getItem("pets")) || [];
+    const jsPDFClass = window.jspdf?.jsPDF;
+
+    if (!jsPDFClass) {
+        alert("PDF não carregou corretamente");
+        return;
+    }
+
+    const user = getUserLogado();
+
+    const pets = (JSON.parse(localStorage.getItem("pets")) || [])
+        .filter(pet => pet.usuario === user?.email);
 
     const pet = pets[index];
 
-    const { jsPDF } = window.jspdf;
-
-    const pdf = new jsPDF("p", "mm", "a4");
+    const pdf = new jsPDFClass("p", "mm", "a4");
 
     pdf.setFillColor(245,245,245);
     pdf.rect(0,0,210,297,"F");
@@ -249,48 +253,14 @@ function gerarPDF(index){
     pdf.text(pet.nome.toUpperCase(),105,198,{ align: "center" });
 
     pdf.setDrawColor(255,145,77);
-    pdf.setLineWidth(2);
     pdf.line(45,205,165,205);
 
     pdf.setTextColor(80,80,80);
-    pdf.setFont("helvetica","bold");
     pdf.setFontSize(18);
 
     pdf.text(`Raça: ${pet.raca}`,20,222);
-
-    // LOCAL
-    pdf.setFontSize(15);
-    pdf.text(
-        `Local: ${pet.cidade || "não informado"} - ${pet.bairro || ""}`,
-        20,
-        230
-    );
-
-    // DATA NOVA
-    pdf.text(
-        `Perdido em: ${pet.dataPerda || "não informado"}`,
-        20,
-        238
-    );
-
-    pdf.setFont("helvetica","normal");
-    pdf.setFontSize(15);
-
-    const descricaoLinhas = pdf.splitTextToSize(pet.descricao,170);
-
-    pdf.text(descricaoLinhas,20,246);
-
-    pdf.setFillColor(71,61,204);
-    pdf.rect(0,255,210,42,"F");
-
-    pdf.setTextColor(255,255,255);
-    pdf.setFont("helvetica","bold");
-    pdf.setFontSize(20);
-
-    pdf.text("ENTRE EM CONTATO",105,270,{ align: "center" });
-
-    pdf.setFontSize(26);
-    pdf.text(pet.telefone,105,284,{ align: "center" });
+    pdf.text(`Local: ${pet.cidade} - ${pet.bairro}`,20,230);
+    pdf.text(`Perdido em: ${pet.dataPerda}`,20,238);
 
     pdf.save(`${pet.nome}-cartaz.pdf`);
 }
@@ -303,13 +273,23 @@ function removerPet(index){
 
     let pets = JSON.parse(localStorage.getItem("pets")) || [];
 
+    const user = getUserLogado();
+
+    const meusPets = pets.filter(pet => pet.usuario === user?.email);
+
+    const petSelecionado = meusPets[index];
+
     const confirmar = confirm("Deseja remover este pet?");
 
     if(confirmar){
 
-        pets.splice(index, 1);
+        const novosPets = pets.filter(p =>
+            !(p.nome === petSelecionado.nome &&
+              p.telefone === petSelecionado.telefone &&
+              p.dataPerda === petSelecionado.dataPerda)
+        );
 
-        localStorage.setItem("pets", JSON.stringify(pets));
+        localStorage.setItem("pets", JSON.stringify(novosPets));
 
         mostrarPets();
     }
