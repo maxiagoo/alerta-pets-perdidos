@@ -3,40 +3,56 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Pet</title>
 
-    <!-- 🔥 FONTE MODERNA -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FONTE MODERNA -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
+
+        *{
+            box-sizing:border-box;
+        }
 
         body{
             margin:0;
             font-family:'Poppins', sans-serif;
-            background: linear-gradient(180deg, #f4f4f4, #e9e9e9);
+            background:#f5f7fb;
+            color:#333;
         }
 
+        /* ================= HEADER ================= */
+
         header{
-            background: linear-gradient(135deg, #ff914d, #ff6b2c);
+            background: linear-gradient(135deg, #4A90E2, #6FB1FC);
             color:white;
-            padding:25px;
+            padding:30px;
             text-align:center;
-            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+            box-shadow:0 4px 15px rgba(0,0,0,0.08);
         }
 
         header h1{
+            margin:0;
+            font-size:36px;
             font-weight:700;
             letter-spacing:1px;
         }
 
+        /* ================= NAV ================= */
+
         nav{
-            background-color:#222;
-            padding:12px;
+            background:white;
+            padding:15px;
             text-align:center;
+            box-shadow:0 2px 10px rgba(0,0,0,0.05);
+            position:sticky;
+            top:0;
+            z-index:1000;
         }
 
         nav a{
-            color:white;
+            color:#4A90E2;
             text-decoration:none;
             margin:15px;
             font-weight:600;
@@ -44,34 +60,42 @@
         }
 
         nav a:hover{
-            color:#ff914d;
+            color:#FF9F43;
         }
 
-        /* ================= CENTRO ================= */
+        /* ================= CONTAINER ================= */
 
         .container{
+            min-height:calc(100vh - 160px);
+
             display:flex;
             justify-content:center;
             align-items:center;
-            min-height:80vh;
-            padding:30px;
+
+            padding:50px 20px;
         }
 
         /* ================= CARD ================= */
 
         .card{
             background:white;
-            width:420px;
-            padding:30px;
-            border-radius:15px;
-            box-shadow:0 10px 25px rgba(0,0,0,0.1);
-            text-align:center;
+            width:100%;
+            max-width:500px;
+
+            padding:35px;
+
+            border-radius:25px;
+
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+            animation:fadeIn 0.6s ease;
         }
 
         .card h2{
-            color:#ff6b2c;
-            margin-bottom:20px;
-            font-weight:700;
+            text-align:center;
+            color:#4A90E2;
+            font-size:30px;
+            margin-bottom:25px;
         }
 
         /* ================= INPUTS ================= */
@@ -79,48 +103,99 @@
         input,
         textarea{
             width:100%;
-            padding:12px;
-            margin-top:10px;
-            border-radius:10px;
-            border:1px solid #ddd;
-            outline:none;
+            padding:14px;
+            margin-top:14px;
+
+            border-radius:14px;
+            border:1px solid #dcdcdc;
+
             font-family:'Poppins', sans-serif;
+            font-size:15px;
+
             transition:0.3s;
+
+            background:white;
         }
 
         input:focus,
         textarea:focus{
-            border-color:#ff914d;
-            box-shadow:0 0 5px rgba(255,145,77,0.4);
+            outline:none;
+            border-color:#4A90E2;
+
+            box-shadow:0 0 10px rgba(74,144,226,0.2);
         }
 
         textarea{
+            height:130px;
             resize:none;
-            height:120px;
         }
 
         input[type="file"]{
-            background:white;
-            padding:8px;
+            padding:10px;
+            cursor:pointer;
         }
 
         /* ================= BOTÃO ================= */
 
         button{
-            margin-top:15px;
             width:100%;
-            padding:14px;
+            margin-top:20px;
+
+            padding:15px;
+
             border:none;
-            border-radius:10px;
-            background: linear-gradient(135deg, #ff914d, #ff6b2c);
+            border-radius:14px;
+
+            background: linear-gradient(135deg, #4A90E2, #6FB1FC);
+
             color:white;
-            font-weight:700;
+
+            font-size:16px;
+            font-weight:600;
+
             cursor:pointer;
+
             transition:0.3s;
         }
 
         button:hover{
-            transform:scale(1.03);
+            transform:translateY(-2px);
+            box-shadow:0 8px 20px rgba(74,144,226,0.25);
+        }
+
+        /* ================= ANIMAÇÃO ================= */
+
+        @keyframes fadeIn{
+
+            from{
+                opacity:0;
+                transform:translateY(20px);
+            }
+
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+
+        }
+
+        /* ================= RESPONSIVO ================= */
+
+        @media(max-width:768px){
+
+            header h1{
+                font-size:28px;
+            }
+
+            nav a{
+                display:inline-block;
+                margin:10px;
+            }
+
+            .card{
+                padding:25px;
+            }
+
         }
 
     </style>
@@ -133,9 +208,21 @@
 </header>
 
 <nav>
+
     <a href="../index.html">Home</a>
-    <a href="cadastro.html">Cadastrar Pet</a>
-    <a href="pets.html">Pets Perdidos</a>
+
+    <a href="cadastro.html">
+        Cadastrar Pet
+    </a>
+
+    <a href="pets.html">
+        Pets Perdidos
+    </a>
+
+    <a href="#" onclick="logout()">
+        Sair
+    </a>
+
 </nav>
 
 <div class="container">
@@ -146,34 +233,67 @@
 
         <form id="formPet">
 
-            <input type="text" id="nome" placeholder="Nome do pet">
+            <input 
+                type="text" 
+                id="nome" 
+                placeholder="Nome do pet"
+            >
 
-            <input type="text" id="raca" placeholder="Raça">
+            <input 
+                type="text" 
+                id="raca" 
+                placeholder="Raça"
+            >
 
-            <input type="text" id="telefone" placeholder="Telefone">
+            <input 
+                type="text" 
+                id="telefone" 
+                placeholder="Telefone para contato"
+            >
 
-            <textarea id="descricao" placeholder="Descrição do desaparecimento"></textarea>
+            <textarea 
+                id="descricao" 
+                placeholder="Descreva como o pet desapareceu, características importantes, comportamento, etc."
+            ></textarea>
 
-            <input type="text" id="cidade" placeholder="Cidade">
+            <input 
+                type="text" 
+                id="cidade" 
+                placeholder="Cidade"
+            >
 
-            <input type="text" id="bairro" placeholder="Bairro">
+            <input 
+                type="text" 
+                id="bairro" 
+                placeholder="Bairro"
+            >
 
-            <input type="date" id="dataPerda">
+            <input 
+                type="date" 
+                id="dataPerda"
+            >
 
-            <input type="file" id="foto" accept="image/*">
+            <input 
+                type="file" 
+                id="foto" 
+                accept="image/*"
+            >
 
-            <button type="submit">Cadastrar Pet</button>
+            <button type="submit">
+                Cadastrar Pet
+            </button>
 
         </form>
 
     </div>
 
 </div>
-            <script src="../js/script.js"></script>
 
-            <script src="js/script.js"></script>
+<script src="../js/script.js"></script>
+
 <script>
     protegerPagina();
 </script>
+
 </body>
 </html>

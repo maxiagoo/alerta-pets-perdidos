@@ -3,142 +3,404 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Alerta de Pets Perdidos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZOOPAW - Alerta de Pets Perdidos</title>
 
-    <!-- 🔥 FONTE PROFISSIONAL -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <!-- FONTE -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
 
-        body{
+        *{
             margin:0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(180deg, #f4f4f4, #e9e9e9);
+            padding:0;
+            box-sizing:border-box;
         }
+
+        body{
+            font-family:'Poppins', sans-serif;
+            background:#f5f9ff;
+            overflow-x:hidden;
+        }
+
+        /* ================= HEADER ================= */
 
         header{
-            background: linear-gradient(135deg, #ff914d, #ff6b2c);
-            color:white;
-            padding:25px;
+
+            background:
+            linear-gradient(
+                135deg,
+                #4A90E2,
+                #6FB1FC
+            );
+
+            padding:35px 20px;
+
             text-align:center;
-            font-size:18px;
-            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+
+            box-shadow:0 4px 15px rgba(0,0,0,0.08);
         }
 
-        /* 🔥 TÍTULO PRINCIPAL DO HEADER */
         header h1{
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            letter-spacing: 1px;
+
+            color:white;
+
+            font-size:42px;
+
+            font-weight:700;
+
+            letter-spacing:1px;
         }
+
+        /* ================= NAV ================= */
 
         nav{
-            background-color:#222;
-            padding:12px;
+
+            background:white;
+
+            padding:18px;
+
             text-align:center;
+
+            box-shadow:0 2px 10px rgba(0,0,0,0.05);
+
             position:sticky;
+
             top:0;
+
+            z-index:1000;
         }
 
         nav a{
-            color:white;
+
             text-decoration:none;
-            margin:15px;
-            font-weight:bold;
+
+            color:#4A90E2;
+
+            font-weight:600;
+
+            margin:0 20px;
+
             transition:0.3s;
         }
 
         nav a:hover{
-            color:#ff914d;
+
+            color:#ff9f43;
         }
 
         /* ================= HERO ================= */
 
-        .banner{
-            padding:80px 20px;
-            text-align:center;
-            background: white;
-        }
+        .hero{
 
-        .banner h1{
-            color:#ff6b2c;
-            font-size:36px;
+            min-height:85vh;
 
-            /* 🔥 FONTE MODERNA */
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-
-            margin-bottom:10px;
-        }
-
-        .banner p{
-            color:#555;
-            font-size:18px;
-        }
-
-        /* ================= CARDS ================= */
-
-        .cards{
             display:flex;
-            justify-content:center;
-            gap:25px;
-            margin-top:50px;
-            flex-wrap:wrap;
+            justify-content:space-between;
+            align-items:center;
+
+            gap:60px;
+
+            padding:80px 8%;
+
+            background:
+            linear-gradient(
+                135deg,
+                #f5f9ff,
+                #eef5ff
+            );
         }
 
-        .card{
-            background:white;
-            padding:25px;
-            width:260px;
-            border-radius:15px;
-            box-shadow:0 8px 20px rgba(0,0,0,0.08);
-            text-align:center;
-            transition:0.3s;
+        .hero-text{
+            flex:1;
         }
 
-        .card:hover{
-            transform:translateY(-5px);
+        .tag{
+
+            display:inline-block;
+
+            background:#e8f1ff;
+
+            color:#4A90E2;
+
+            padding:10px 18px;
+
+            border-radius:30px;
+
+            font-size:14px;
+
+            font-weight:600;
+
+            margin-bottom:25px;
         }
 
-        .card h3{
-            color:#ff6b2c;
+        .hero-text h1{
 
-            /* 🔥 FONTE MAIS BONITA NOS TÍTULOS DOS CARDS */
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
+            font-size:64px;
 
-            margin-bottom:10px;
+            color:#2c3e50;
+
+            line-height:1.1;
+
+            margin-bottom:25px;
         }
 
-        .card p{
-            color:#555;
-            font-size:15px;
+        .hero-text p{
+
+            font-size:20px;
+
+            color:#666;
+
+            line-height:1.8;
+
+            max-width:650px;
         }
 
         /* ================= BOTÕES ================= */
 
-        .card button{
-            margin-top:15px;
-            background: linear-gradient(135deg, #ff914d, #ff6b2c);
-            color:white;
+        .hero-buttons{
+
+            display:flex;
+
+            gap:20px;
+
+            margin-top:40px;
+
+            flex-wrap:wrap;
+        }
+
+        .hero-buttons button{
+
+            padding:16px 30px;
+
             border:none;
-            padding:12px 18px;
-            border-radius:8px;
+
+            border-radius:14px;
+
+            font-size:16px;
+
+            font-weight:600;
+
             cursor:pointer;
-            font-weight:bold;
+
+            transition:0.3s;
+
+            background:
+            linear-gradient(
+                135deg,
+                #4A90E2,
+                #6FB1FC
+            );
+
+            color:white;
+
+            box-shadow:0 8px 20px rgba(74,144,226,0.25);
+        }
+
+        .hero-buttons button:hover{
+
+            transform:translateY(-4px);
+        }
+
+        .secondary-btn{
+
+            background:white !important;
+
+            color:#4A90E2 !important;
+
+            border:2px solid #4A90E2 !important;
+
+            box-shadow:none !important;
+        }
+
+        /* ================= IMAGEM ================= */
+
+        .hero-image{
+
+            flex:1;
+
+            display:flex;
+            justify-content:center;
+        }
+
+        .hero-image img{
+
+            width:100%;
+
+            max-width:520px;
+
+            border-radius:30px;
+
+            box-shadow:0 20px 40px rgba(0,0,0,0.12);
+
+            object-fit:cover;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats{
+
+            display:flex;
+
+            gap:20px;
+
+            margin-top:55px;
+
+            flex-wrap:wrap;
+        }
+
+        .stat-box{
+
+            background:white;
+
+            padding:22px 28px;
+
+            border-radius:20px;
+
+            box-shadow:0 8px 20px rgba(0,0,0,0.06);
+
+            min-width:160px;
+
             transition:0.3s;
         }
 
-        .card button:hover{
-            transform:scale(1.05);
+        .stat-box:hover{
+
+            transform:translateY(-5px);
+        }
+
+        .stat-box h3{
+
+            color:#4A90E2;
+
+            font-size:30px;
+
+            margin-bottom:5px;
+        }
+
+        .stat-box span{
+
+            color:#777;
+
+            font-size:14px;
+        }
+
+        /* ================= FEATURES ================= */
+
+        .features{
+
+            display:flex;
+
+            justify-content:center;
+
+            gap:25px;
+
+            flex-wrap:wrap;
+
+            padding:90px 20px;
+
+            background:white;
+        }
+
+        .feature-card{
+
+            background:#f8fbff;
+
+            width:320px;
+
+            padding:35px;
+
+            border-radius:25px;
+
+            box-shadow:0 10px 25px rgba(0,0,0,0.06);
+
+            transition:0.3s;
+        }
+
+        .feature-card:hover{
+
+            transform:translateY(-7px);
+        }
+
+        .feature-card h3{
+
+            color:#4A90E2;
+
+            margin-bottom:15px;
+
+            font-size:22px;
+        }
+
+        .feature-card p{
+
+            color:#666;
+
+            line-height:1.7;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer{
+
+            background:#2c3e50;
+
+            color:white;
+
+            padding:50px 20px;
+
+            text-align:center;
+        }
+
+        footer h2{
+
+            margin-bottom:15px;
+
+            font-size:28px;
+        }
+
+        footer p{
+
+            color:#d6d6d6;
+
+            margin-bottom:10px;
+        }
+
+        footer a{
+
+            color:#6FB1FC;
+
+            text-decoration:none;
         }
 
         /* ================= RESPONSIVO ================= */
 
-        @media(max-width: 768px){
-            .cards{
+        @media(max-width:950px){
+
+            .hero{
+
                 flex-direction:column;
-                align-items:center;
+
+                text-align:center;
+            }
+
+            .hero-text h1{
+
+                font-size:42px;
+            }
+
+            .hero-buttons{
+
+                justify-content:center;
+            }
+
+            .stats{
+
+                justify-content:center;
+            }
+
+            .hero-image img{
+
+                max-width:100%;
             }
         }
 
@@ -147,60 +409,188 @@
 
 <body>
 
-<header>
-    <h1>🐾ZOOPAW🐾</h1>
-</header>
+    <!-- HEADER -->
 
-<nav>
+    <header>
+
+        <h1>🐾 ZOOPAW 🐾</h1>
+
+    </header>
+
+    <!-- NAV -->
+
+    <nav>
+
     <a href="index.html">Home</a>
-    <a href="pages/cadastro.html">Cadastrar Pet</a>
-    <a href="pages/pets.html">Pets Perdidos</a>
+
+    <a href="pages/cadastro.html">
+        Cadastrar Pet
+    </a>
+
+    <a href="pages/pets.html">
+        Pets Perdidos
+    </a>
+
+    <a href="#" onclick="logout()">
+        Sair
+    </a>
+
 </nav>
 
-<section class="banner">
+    <!-- HERO -->
 
-    <h1>Ajude um pet a voltar para casa 🐶</h1>
+    <section class="hero">
 
-    <p>Sistema de divulgação de animais desaparecidos com busca por região e contato direto.</p>
+        <div class="hero-text">
 
-    <div class="cards">
+            <span class="tag">
+                🐾 Plataforma de ajuda animal
+            </span>
 
-        <div class="card">
-            <h3>🐾 Perdi meu pet</h3>
-            <p>Cadastre o animal desaparecido e aumente as chances de encontrá-lo.</p>
+            <h1>
+                Ajude um pet a voltar para casa
+            </h1>
 
-            <a href="pages/cadastro.html">
-                <button>Registrar</button>
-            </a>
+            <p>
+                Sistema inteligente para divulgação de pets desaparecidos,
+                geração de cartazes e busca por região.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="pages/cadastro.html">
+
+                    <button>
+                        Cadastrar Pet
+                    </button>
+
+                </a>
+
+                <a href="pages/pets.html">
+
+                    <button class="secondary-btn">
+                        Ver Pets
+                    </button>
+
+                </a>
+
+            </div>
+
+            <!-- STATS -->
+
+            <div class="stats">
+
+                <div class="stat-box">
+
+                    <h3>+250</h3>
+
+                    <span>Pets cadastrados</span>
+
+                </div>
+
+                <div class="stat-box">
+
+                    <h3>+80</h3>
+
+                    <span>Pets encontrados</span>
+
+                </div>
+
+                <div class="stat-box">
+
+                    <h3>+15</h3>
+
+                    <span>Cidades atendidas</span>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="card">
-            <h3>📍 Encontrei um pet</h3>
-            <p>Ajude a localizar o dono rapidamente usando o sistema.</p>
+        <!-- IMAGEM -->
 
-            <a href="pages/pets.html">
-                <button>Ver Pets</button>
-            </a>
+        <div class="hero-image">
+
+            <img 
+                src="https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop"
+                alt="Pet"
+            >
+
         </div>
 
-        <div class="card">
-            <h3>⚡ Busca rápida</h3>
-            <p>Filtre pets por cidade e encontre mais rápido.</p>
+    </section>
 
-            <a href="pages/pets.html">
-                <button>Buscar</button>
-            </a>
+    <!-- FEATURES -->
+
+    <section class="features">
+
+        <div class="feature-card">
+
+            <h3>📍 Busca por região</h3>
+
+            <p>
+                Encontre pets desaparecidos rapidamente usando filtros por cidade.
+            </p>
+
         </div>
 
-    </div>
+        <div class="feature-card">
 
-</section>
+            <h3>📄 Cartazes automáticos</h3>
 
-<script src="js/script.js"></script>
-<script>
-    protegerPagina();
-</script>
+            <p>
+                Gere PDFs profissionais para divulgar animais desaparecidos.
+            </p>
 
+        </div>
+
+        <div class="feature-card">
+
+            <h3>💬 Contato rápido</h3>
+
+            <p>
+                Entre em contato diretamente com o responsável via WhatsApp.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h2>🐾 ZOOPAW</h2>
+
+        <p>
+            Sistema de alerta e divulgação de pets desaparecidos.
+        </p>
+
+        <p>
+            Projeto acadêmico desenvolvido na Fatec.
+        </p>
+
+        <p>
+            GitHub:
+            <a href="#">
+                Seu repositório
+            </a>
+        </p>
+
+        <p>
+            © 2026 Zoopaw - Todos os direitos reservados
+        </p>
+
+    </footer>
+
+    <!-- JS -->
+
+    <script src="js/script.js"></script>
+
+    <script>
+        protegerPagina();
+    </script>
 
 </body>
 </html>

@@ -1,74 +1,195 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Alerta de Pets</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <!-- FONTE MODERNA -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        body {
-            margin: 0;
-            font-family: 'Poppins', Arial, sans-serif;
-            background: linear-gradient(135deg, #ff7a18, #af002d);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+
+        *{
+            box-sizing:border-box;
         }
 
-        .login-container {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            width: 350px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            text-align: center;
+        body{
+            margin:0;
+            font-family:'Poppins', sans-serif;
+
+            background: linear-gradient(135deg, #4A90E2, #6FB1FC);
+
+            min-height:100vh;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            padding:20px;
         }
 
-        .login-container h1 {
-            margin-bottom: 20px;
-            font-size: 24px;
+        /* ================= CARD LOGIN ================= */
+
+        .login-container{
+
+            background:white;
+
+            width:100%;
+            max-width:400px;
+
+            padding:40px;
+
+            border-radius:25px;
+
+            box-shadow:0 15px 35px rgba(0,0,0,0.12);
+
+            text-align:center;
+
+            animation:fadeIn 0.6s ease;
         }
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border-radius: 10px;
-            border: 1px solid #ddd;
-            outline: none;
+        /* ================= TÍTULO ================= */
+
+        .login-container h1{
+
+            margin-bottom:25px;
+
+            font-size:32px;
+
+            color:#4A90E2;
+
+            font-weight:700;
         }
+
+        /* ================= INPUTS ================= */
+
+        input{
+
+            width:100%;
+
+            padding:14px;
+
+            margin:10px 0;
+
+            border-radius:14px;
+
+            border:1px solid #dcdcdc;
+
+            outline:none;
+
+            font-size:15px;
+
+            font-family:'Poppins', sans-serif;
+
+            transition:0.3s;
+        }
+
+        input:focus{
+
+            border-color:#4A90E2;
+
+            box-shadow:0 0 10px rgba(74,144,226,0.2);
+        }
+
+        /* ================= BOTÃO ================= */
 
         button {
+
             width: 100%;
-            padding: 12px;
-            margin-top: 10px;
+
+            padding: 14px;
+
+            margin-top: 15px;
+
             border: none;
-            border-radius: 10px;
-            background: #ff4d4d;
+
+            border-radius: 14px;
+
+            background: linear-gradient(135deg, #4A90E2, #6FB1FC);
+
             color: white;
+
             font-size: 16px;
+
+            font-weight: 600;
+
             cursor: pointer;
+
             transition: 0.3s;
         }
 
         button:hover {
-            background: #e63c3c;
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 8px 20px rgba(74,144,226,0.25);
         }
 
-        .toggle {
-            margin-top: 15px;
-            font-size: 14px;
-            color: #555;
-            cursor: pointer;
+        /* ================= TOGGLE ================= */
+
+        .toggle{
+
+            margin-top:20px;
+
+            font-size:14px;
+
+            color:#666;
+
+            cursor:pointer;
         }
 
-        .toggle span {
-            color: #ff4d4d;
-            font-weight: bold;
+        .toggle span{
+
+            color:#4A90E2;
+
+            font-weight:600;
         }
+
+        /* ================= TEXTO EXTRA ================= */
+
+        .subtitulo{
+
+            color:#777;
+
+            margin-bottom:25px;
+
+            font-size:15px;
+
+            line-height:1.5;
+        }
+
+        /* ================= ANIMAÇÃO ================= */
+
+        @keyframes fadeIn{
+
+            from{
+                opacity:0;
+                transform:translateY(20px);
+            }
+
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+
+        }
+
+        /* ================= RESPONSIVO ================= */
+
+        @media(max-width:500px){
+
+            .login-container{
+                padding:30px 25px;
+            }
+
+            .login-container h1{
+                font-size:28px;
+            }
+
+        }
+
     </style>
 </head>
 
@@ -76,12 +197,27 @@
 
 <div class="login-container">
 
-    <h1 id="tituloForm">Login</h1>
+    <h1 id="tituloForm">🐾 Zoopaw</h1>
 
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="senha" placeholder="Senha">
+    <p class="subtitulo">
+        Faça login para cadastrar e acompanhar pets desaparecidos.
+    </p>
 
-    <button onclick="acao()">Entrar</button>
+    <input 
+        type="email" 
+        id="email" 
+        placeholder="Digite seu email"
+    >
+
+    <input 
+        type="password" 
+        id="senha" 
+        placeholder="Digite sua senha"
+    >
+
+    <button onclick="acao()">
+        Entrar
+    </button>
 
     <div class="toggle" onclick="alternar()">
         Não tem conta? <span>Cadastrar</span>
@@ -90,60 +226,113 @@
 </div>
 
 <script>
+
     let modo = "login";
 
     function alternar() {
+
         let titulo = document.getElementById("tituloForm");
+
         let botao = document.querySelector("button");
+
         let toggle = document.querySelector(".toggle");
 
+        let subtitulo = document.querySelector(".subtitulo");
+
         if (modo === "login") {
+
             modo = "cadastro";
-            titulo.innerText = "Cadastro";
+
+            titulo.innerText = "🐾 Criar Conta";
+
             botao.innerText = "Cadastrar";
-            toggle.innerHTML = "Já tem conta? <span>Entrar</span>";
+
+            subtitulo.innerText =
+                "Crie sua conta para divulgar pets desaparecidos.";
+
+            toggle.innerHTML =
+                'Já tem conta? <span>Entrar</span>';
+
         } else {
+
             modo = "login";
-            titulo.innerText = "Login";
+
+            titulo.innerText = "🐾 Zoopaw";
+
             botao.innerText = "Entrar";
-            toggle.innerHTML = "Não tem conta? <span>Cadastrar</span>";
+
+            subtitulo.innerText =
+                "Faça login para cadastrar e acompanhar pets desaparecidos.";
+
+            toggle.innerHTML =
+                'Não tem conta? <span>Cadastrar</span>';
         }
     }
 
     function acao() {
+
         let email = document.getElementById("email").value;
+
         let senha = document.getElementById("senha").value;
 
-        let users = JSON.parse(localStorage.getItem("users")) || [];
+        let users =
+            JSON.parse(localStorage.getItem("users")) || [];
+
+        // ================= CADASTRO =================
 
         if (modo === "cadastro") {
-            let existe = users.find(u => u.email === email);
+
+            let existe =
+                users.find(u => u.email === email);
 
             if (existe) {
+
                 alert("Usuário já existe!");
+
                 return;
             }
 
             users.push({ email, senha });
-            localStorage.setItem("users", JSON.stringify(users));
+
+            localStorage.setItem(
+                "users",
+                JSON.stringify(users)
+            );
 
             alert("Cadastro realizado com sucesso!");
+
             alternar();
 
-        } else {
-            let user = users.find(u => u.email === email && u.senha === senha);
+        }
+
+        // ================= LOGIN =================
+
+        else {
+
+            let user =
+                users.find(
+                    u => u.email === email &&
+                    u.senha === senha
+                );
 
             if (!user) {
+
                 alert("Email ou senha inválidos!");
+
                 return;
             }
 
-            localStorage.setItem("currentUser", JSON.stringify({ email }));
+            localStorage.setItem(
+                "currentUser",
+                JSON.stringify({ email })
+            );
 
             alert("Login feito com sucesso!");
+
             window.location.href = "index.html";
         }
     }
+
 </script>
 
 </body>

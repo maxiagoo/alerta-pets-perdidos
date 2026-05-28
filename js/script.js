@@ -164,9 +164,19 @@ if(inputBusca){
 
         container.innerHTML = filtrados.length
             ? filtrados.map(renderCard).join("")
-            : `<div style="text-align:center;padding:40px;color:#666;">
-                Nenhum resultado encontrado 🐾
-              </div>`;
+            : `
+                <div style="
+                    text-align:center;
+                    padding:40px;
+                    color:#666;
+                    background:white;
+                    border-radius:20px;
+                    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+                    width:300px;
+                ">
+                    Nenhum resultado encontrado 🐾
+                </div>
+              `;
     });
 }
 
@@ -174,42 +184,85 @@ if(inputBusca){
 // ===============================
 // CARD
 // ===============================
+// ===============================
+// CARD PREMIUM
+// ===============================
 function renderCard(pet, index){
 
     return `
+    
         <div class="card">
 
-            <img src="${pet.foto}" alt="${pet.nome}">
+            <div class="card-image">
 
-            <h3>${pet.nome}</h3>
+                <span class="badge">
+                    🔴 DESAPARECIDO
+                </span>
 
-            <p><strong>Raça:</strong> ${pet.raca}</p>
+                <img src="${pet.foto}" alt="${pet.nome}">
 
-            <p>${pet.descricao}</p>
+            </div>
 
-            <p><strong>Local:</strong> ${pet.cidade || "não informado"} - ${pet.bairro || ""}</p>
+            <div class="card-content">
 
-            <p><strong>Perdido em:</strong> ${pet.dataPerda || "não informado"}</p>
+                <h3>${pet.nome}</h3>
 
-            <a href="https://wa.me/55${pet.telefone}" target="_blank">
-                <button>Entrar em contato</button>
-            </a>
+                <div class="info">
+                    🐶 <strong>Raça:</strong> ${pet.raca}
+                </div>
 
-            <br><br>
+                <div class="info">
+                    📍 ${pet.cidade || "Não informado"}
+                    ${pet.bairro ? "- " + pet.bairro : ""}
+                </div>
 
-            <button onclick="gerarPDF(${index})">Gerar Cartaz PDF</button>
+                <div class="info">
+                    📅 ${pet.dataPerda || "Não informado"}
+                </div>
 
-            <br><br>
+                <p class="descricao">
+                    ${pet.descricao}
+                </p>
 
-            <button onclick="removerPet(${index})">Remover Pet</button>
+                <div class="buttons">
+
+                    <a 
+                        href="https://wa.me/55${pet.telefone}" 
+                        target="_blank"
+                    >
+
+                        <button class="btn whats">
+                            Entrar em contato
+                        </button>
+
+                    </a>
+
+                    <button 
+                        class="btn pdf"
+                        onclick="gerarPDF(${index})"
+                    >
+                        Gerar Cartaz PDF
+                    </button>
+
+                    <button 
+                        class="btn remove"
+                        onclick="removerPet(${index})"
+                    >
+                        Remover Pet
+                    </button>
+
+                </div>
+
+            </div>
 
         </div>
+
     `;
 }
 
 
 // ===============================
-// PDF (CORRIGIDO DE VERDADE)
+// PDF PROFISSIONAL
 // ===============================
 function gerarPDF(index){
 
@@ -229,42 +282,99 @@ function gerarPDF(index){
 
     const pdf = new jsPDFClass("p", "mm", "a4");
 
-    pdf.setFillColor(245,245,245);
+    // FUNDO
+    pdf.setFillColor(245,247,251);
     pdf.rect(0,0,210,297,"F");
 
-    pdf.setFillColor(220,53,69);
+    // TOPO AZUL
+    pdf.setFillColor(74,144,226);
     pdf.rect(0,0,210,45,"F");
 
+    // TÍTULO
     pdf.setTextColor(255,255,255);
     pdf.setFont("helvetica","bold");
-    pdf.setFontSize(38);
+    pdf.setFontSize(36);
 
-    pdf.text("PERDIDO",105,28,{ align: "center" });
+    pdf.text("PET DESAPARECIDO",105,28,{ align: "center" });
 
+    // CARD BRANCO
     pdf.setFillColor(255,255,255);
-    pdf.roundedRect(15,50,180,130,5,5,"F");
+    pdf.roundedRect(15,50,180,130,8,8,"F");
 
+    // FOTO
     pdf.addImage(pet.foto,"JPEG",20,55,170,120);
 
-    pdf.setTextColor(71,61,204);
-    pdf.setFont("times","bolditalic");
-    pdf.setFontSize(34);
+    // NOME
+    pdf.setTextColor(74,144,226);
+    pdf.setFont("helvetica","bold");
+    pdf.setFontSize(30);
 
-    pdf.text(pet.nome.toUpperCase(),105,198,{ align: "center" });
+    pdf.text(
+        pet.nome.toUpperCase(),
+        105,
+        198,
+        { align: "center" }
+    );
 
-    pdf.setDrawColor(255,145,77);
+    // LINHA
+    pdf.setDrawColor(255,159,67);
+    pdf.setLineWidth(1);
+
     pdf.line(45,205,165,205);
 
-    pdf.setTextColor(80,80,80);
-    pdf.setFontSize(18);
+    // INFORMAÇÕES
+    pdf.setTextColor(70,70,70);
+    pdf.setFont("helvetica","normal");
+    pdf.setFontSize(16);
 
     pdf.text(`Raça: ${pet.raca}`,20,222);
-    pdf.text(`Local: ${pet.cidade} - ${pet.bairro}`,20,230);
-    pdf.text(`Perdido em: ${pet.dataPerda}`,20,238);
+
+    pdf.text(
+        `Local: ${pet.cidade} - ${pet.bairro}`,
+        20,
+        232
+    );
+
+    pdf.text(
+        `Perdido em: ${pet.dataPerda}`,
+        20,
+        242
+    );
+
+    // DESCRIÇÃO
+    pdf.setFontSize(14);
+
+    const descricao = pdf.splitTextToSize(
+        `Descrição: ${pet.descricao}`,
+        170
+    );
+
+    pdf.text(descricao, 20, 252);
+
+    // CONTATO
+    pdf.setTextColor(74,144,226);
+    pdf.setFont("helvetica","bold");
+    pdf.setFontSize(16);
+
+    pdf.text(
+        `Contato: ${pet.telefone}`,
+        20,
+        275
+    );
+
+    // RODAPÉ
+    pdf.setFontSize(12);
+    pdf.setTextColor(120,120,120);
+
+    pdf.text(
+        "Ajude este pet a voltar para casa!",
+        105,
+        290,
+        { align: "center" }
+    );
 
     pdf.save(`${pet.nome}-cartaz.pdf`);
 }
-
 
 // ===============================
 // REMOVER
@@ -275,11 +385,15 @@ function removerPet(index){
 
     const user = getUserLogado();
 
-    const meusPets = pets.filter(pet => pet.usuario === user?.email);
+    const meusPets = pets.filter(
+        pet => pet.usuario === user?.email
+    );
 
     const petSelecionado = meusPets[index];
 
-    const confirmar = confirm("Deseja remover este pet?");
+    const confirmar = confirm(
+        "Deseja remover este pet?"
+    );
 
     if(confirmar){
 
@@ -289,8 +403,31 @@ function removerPet(index){
               p.dataPerda === petSelecionado.dataPerda)
         );
 
-        localStorage.setItem("pets", JSON.stringify(novosPets));
+        localStorage.setItem(
+            "pets",
+            JSON.stringify(novosPets)
+        );
 
         mostrarPets();
+    }
+}
+
+
+// ===============================
+// LOGOUT
+// ===============================
+function logout(){
+
+    localStorage.removeItem("currentUser");
+
+    alert("Logout realizado com sucesso!");
+
+    if(window.location.pathname.includes("/pages/")){
+
+        window.location.href = "../login.html";
+
+    }else{
+
+        window.location.href = "login.html";
     }
 }
