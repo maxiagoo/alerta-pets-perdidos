@@ -1,5 +1,5 @@
 // ===============================
-// USUÁRIO LOGADO
+// USUÁRIO LOGADO (permanece localStorage)
 // ===============================
 function getUserLogado() {
     return JSON.parse(localStorage.getItem("currentUser"));
@@ -14,43 +14,36 @@ function protegerPagina() {
     }
 }
 
-
 // ===============================
-// CLASSE PET
+// CLASSE PET (modelo de dados enviado ao BACKEND)
 // ===============================
 class Pet {
-
-    constructor(nome, raca, telefone, descricao, foto, cidade, bairro, dataPerda){
-
+    constructor(nome, raca, telefone, descricao, foto, cidade, bairro, dataPerda) {
         this.nome = nome;
         this.raca = raca;
         this.telefone = telefone;
         this.descricao = descricao;
         this.foto = foto;
-
         this.cidade = cidade;
         this.bairro = bairro;
-
         this.dataPerda = dataPerda;
 
+        // usuário continua vindo do localStorage (login simples)
         this.usuario = getUserLogado()?.email || "anonimo";
     }
 }
 
-
 // ===============================
-// CADASTRO
+// CADASTRO DE PET
 // ===============================
 const formulario = document.querySelector("#formPet");
 
-if(formulario){
-
-    formulario.addEventListener("submit", function(event){
-
+if (formulario) {
+    formulario.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        if(!getUserLogado()){
-            alert("Você precisa estar logado para cadastrar um pet!");
+        if (!getUserLogado()) {
+            alert("Você precisa estar logado!");
             window.location.href = "login.html";
             return;
         }
@@ -59,32 +52,21 @@ if(formulario){
         const raca = document.querySelector("#raca").value;
         const telefone = document.querySelector("#telefone").value;
         const descricao = document.querySelector("#descricao").value;
-
         const cidade = document.querySelector("#cidade").value;
         const bairro = document.querySelector("#bairro").value;
-
         const dataPerda = document.querySelector("#dataPerda").value;
-
         const arquivoFoto = document.querySelector("#foto").files[0];
 
-        if(
-            nome === "" ||
-            raca === "" ||
-            telefone === "" ||
-            descricao === "" ||
-            cidade === "" ||
-            dataPerda === "" ||
-            !arquivoFoto
-        ){
-            alert("Preencha todos os campos obrigatórios!");
+        if (!nome || !raca || !telefone || !descricao || !cidade || !dataPerda || !arquivoFoto) {
+            alert("Preencha todos os campos!");
             return;
         }
 
         const leitor = new FileReader();
 
-        leitor.onload = function(){
+        leitor.onload = function () {
 
-            const novoPet = new Pet(
+            const pet = new Pet(
                 nome,
                 raca,
                 telefone,
@@ -95,160 +77,147 @@ if(formulario){
                 dataPerda
             );
 
-            let pets = JSON.parse(localStorage.getItem("pets")) || [];
+            // =====================================================
+            // 🔥 MIGRAÇÃO LOCALSTORAGE → BACKEND (JAVALIN API)
+            // =====================================================
+            // Antes: localStorage.setItem("pets", ...)
+            // Agora: enviamos para o backend Java (futuro banco de dados)
 
-            pets.push(novoPet);
-
-            localStorage.setItem("pets", JSON.stringify(pets));
-
-            alert("Pet cadastrado com sucesso!");
-
-            formulario.reset();
-
-            window.location.href = "pets.html";
+            fetch("http://localhost:7000/pets", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(pet)
+            })
+            .then(res => res.json())
+            .then(() => {
+                alert("Pet cadastrado com sucesso no backend!");
+                formulario.reset();
+                window.location.href = "pets.html";
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Erro ao cadastrar pet no servidor");
+            });
         };
 
         leitor.readAsDataURL(arquivoFoto);
     });
 }
 
-
 // ===============================
-// LISTA
+// LISTAGEM DE PETS
 // ===============================
 const lista = document.querySelector(".cards");
 
-if(lista){
+if (lista) {
     mostrarPets();
 }
 
-function mostrarPets(){
+function mostrarPets() {
 
     const container = document.querySelector(".cards");
-
-    const pets = JSON.parse(localStorage.getItem("pets")) || [];
-
     const user = getUserLogado();
 
-    const meusPets = pets.filter(pet => pet.usuario === user?.email);
+    // =====================================================
+    // 🔥 MIGRAÇÃO: localStorage → BACKEND (API Java)
+    // =====================================================
+    // Antes: JSON.parse(localStorage.getItem("pets"))
+    // Agora: GET no backend Javalin (/pets)
 
-    container.innerHTML = "";
+    fetch("http://localhost:7000/pets")
+        .then(res => res.json())
+        .then(pets => {
 
-    meusPets.forEach(function(pet, index){
-        container.innerHTML += renderCard(pet, index);
-    });
+            const meusPets = pets;
+            //antigo: const meusPets = pets.filter(p => p.usuario === user?.email);
+            container.innerHTML = "";
+
+            meusPets.forEach((pet, index) => {
+                container.innerHTML += renderCard(pet, index);
+            });
+        });
 }
 
-
 // ===============================
-// BUSCA
+// BUSCA DE PETS
 // ===============================
 const inputBusca = document.querySelector("#buscaCidade");
 
-if(inputBusca){
-
-    inputBusca.addEventListener("input", function(){
+if (inputBusca) {
+    inputBusca.addEventListener("input", function () {
 
         const user = getUserLogado();
 
-        const pets = (JSON.parse(localStorage.getItem("pets")) || [])
-            .filter(pet => pet.usuario === user?.email);
+        // =====================================================
+        // 🔥 MIGRAÇÃO: busca agora vem do BACKEND
+        // =====================================================
+        fetch("http://localhost:7000/pets")
+            .then(res => res.json())
+            .then(pets => {
 
-        const filtrados = pets.filter(pet =>
-            (pet.cidade || "")
-            .toLowerCase()
-            .includes(this.value.toLowerCase())
-        );
+                const meusPets = pets.filter(p => p.usuario === user?.email);
 
-        const container = document.querySelector(".cards");
+                const filtrados = meusPets.filter(pet =>
+                    (pet.cidade || "")
+                        .toLowerCase()
+                        .includes(this.value.toLowerCase())
+                );
 
-        container.innerHTML = filtrados.length
-            ? filtrados.map(renderCard).join("")
-            : `
-                <div style="
-                    text-align:center;
-                    padding:40px;
-                    color:#666;
-                    background:white;
-                    border-radius:20px;
-                    box-shadow:0 5px 15px rgba(0,0,0,0.08);
-                    width:300px;
-                ">
-                    Nenhum resultado encontrado 🐾
-                </div>
-              `;
+                const container = document.querySelector(".cards");
+
+                container.innerHTML = filtrados.length
+                    ? filtrados.map(renderCard).join("")
+                    : `
+                        <div style="
+                            text-align:center;
+                            padding:40px;
+                            color:#666;
+                            background:white;
+                            border-radius:20px;
+                            width:300px;
+                        ">
+                            Nenhum resultado encontrado 🐾
+                        </div>
+                    `;
+            });
     });
 }
 
-
 // ===============================
-// CARD
+// CARD (interface permanece igual)
 // ===============================
-// ===============================
-// CARD PREMIUM
-// ===============================
-function renderCard(pet, index){
+function renderCard(pet, index) {
 
     return `
-    
         <div class="card">
 
             <div class="card-image">
-
-                <span class="badge">
-                    🔴 DESAPARECIDO
-                </span>
-
+                <span class="badge">🔴 DESAPARECIDO</span>
                 <img src="${pet.foto}" alt="${pet.nome}">
-
             </div>
 
             <div class="card-content">
 
                 <h3>${pet.nome}</h3>
 
-                <div class="info">
-                    🐶 <strong>Raça:</strong> ${pet.raca}
-                </div>
+                <div class="info">🐶 <strong>Raça:</strong> ${pet.raca}</div>
 
-                <div class="info">
-                    📍 ${pet.cidade || "Não informado"}
-                    ${pet.bairro ? "- " + pet.bairro : ""}
-                </div>
+                <div class="info">📍 ${pet.cidade || "Não informado"} ${pet.bairro ? "- " + pet.bairro : ""}</div>
 
-                <div class="info">
-                    📅 ${pet.dataPerda || "Não informado"}
-                </div>
+                <div class="info">📅 ${pet.dataPerda || "Não informado"}</div>
 
-                <p class="descricao">
-                    ${pet.descricao}
-                </p>
+                <p class="descricao">${pet.descricao}</p>
 
                 <div class="buttons">
 
-                    <a 
-                        href="https://wa.me/55${pet.telefone}" 
-                        target="_blank"
-                    >
-
-                        <button class="btn whats">
-                            Entrar em contato
-                        </button>
-
+                    <a href="https://wa.me/55${pet.telefone}" target="_blank">
+                        <button class="btn whats">Entrar em contato</button>
                     </a>
 
-                    <button 
-                        class="btn pdf"
-                        onclick="gerarPDF(${index})"
-                    >
+                    <button class="btn pdf" onclick="gerarPDF(${index})">
                         Gerar Cartaz PDF
-                    </button>
-
-                    <button 
-                        class="btn remove"
-                        onclick="removerPet(${index})"
-                    >
-                        Remover Pet
                     </button>
 
                 </div>
@@ -256,15 +225,13 @@ function renderCard(pet, index){
             </div>
 
         </div>
-
     `;
 }
 
-
 // ===============================
-// PDF PROFISSIONAL
+// PDF (continua usando dados do backend)
 // ===============================
-function gerarPDF(index){
+function gerarPDF(index) {
 
     const jsPDFClass = window.jspdf?.jsPDF;
 
@@ -275,159 +242,112 @@ function gerarPDF(index){
 
     const user = getUserLogado();
 
-    const pets = (JSON.parse(localStorage.getItem("pets")) || [])
-        .filter(pet => pet.usuario === user?.email);
+    fetch("http://localhost:7000/pets")
+        .then(res => res.json())
+        .then(pets => {
 
-    const pet = pets[index];
+            const pet = pets[index];
+            //atualizado
+            if (!pet) {
+                alert("Pet não encontrado");
+                return;
+            }
 
-    const pdf = new jsPDFClass("p", "mm", "a4");
+            const pdf = new jsPDFClass("p", "mm", "a4");
 
-    // FUNDO
-    pdf.setFillColor(245,247,251);
-    pdf.rect(0,0,210,297,"F");
+            // Fundo
+            pdf.setFillColor(245, 247, 251);
+            pdf.rect(0, 0, 210, 297, "F");
 
-    // TOPO AZUL
-    pdf.setFillColor(74,144,226);
-    pdf.rect(0,0,210,45,"F");
+            // Cabeçalho
+            pdf.setFillColor(74, 144, 226);
+            pdf.rect(0, 0, 210, 45, "F");
 
-    // TÍTULO
-    pdf.setTextColor(255,255,255);
-    pdf.setFont("helvetica","bold");
-    pdf.setFontSize(36);
+            pdf.setTextColor(255, 255, 255);
+            pdf.setFont("helvetica", "bold");
+            pdf.setFontSize(32);
+            pdf.text("PET DESAPARECIDO", 105, 28, { align: "center" });
 
-    pdf.text("PET DESAPARECIDO",105,28,{ align: "center" });
+            // FOTO
+            if (pet.foto) {
+                try {
 
-    // CARD BRANCO
-    pdf.setFillColor(255,255,255);
-    pdf.roundedRect(15,50,180,130,8,8,"F");
+                    const tipoImagem =
+                        pet.foto.includes("png") ? "PNG" : "JPEG";
 
-    // FOTO
-    pdf.addImage(pet.foto,"JPEG",20,55,170,120);
+                    pdf.addImage(
+                        pet.foto,
+                        tipoImagem,
+                        30,
+                        55,
+                        150,
+                        110
+                    );
 
-    // NOME
-    pdf.setTextColor(74,144,226);
-    pdf.setFont("helvetica","bold");
-    pdf.setFontSize(30);
+                } catch (erro) {
+                    console.error("Erro ao inserir imagem:", erro);
+                }
+            }
 
-    pdf.text(
-        pet.nome.toUpperCase(),
-        105,
-        198,
-        { align: "center" }
-    );
+            // Nome
+            pdf.setTextColor(74, 144, 226);
+            pdf.setFontSize(26);
+            pdf.text(
+                pet.nome.toUpperCase(),
+                105,
+                180,
+                { align: "center" }
+            );
 
-    // LINHA
-    pdf.setDrawColor(255,159,67);
-    pdf.setLineWidth(1);
+            // Informações
+            pdf.setTextColor(70, 70, 70);
+            pdf.setFontSize(14);
 
-    pdf.line(45,205,165,205);
+            pdf.text(`Raça: ${pet.raca}`, 20, 200);
 
-    // INFORMAÇÕES
-    pdf.setTextColor(70,70,70);
-    pdf.setFont("helvetica","normal");
-    pdf.setFontSize(16);
+            pdf.text(
+                `Local: ${pet.cidade || ""} ${pet.bairro ? "- " + pet.bairro : ""}`,
+                20,
+                210
+            );
 
-    pdf.text(`Raça: ${pet.raca}`,20,222);
+            pdf.text(
+                `Perdido em: ${pet.dataPerda || ""}`,
+                20,
+                220
+            );
 
-    pdf.text(
-        `Local: ${pet.cidade} - ${pet.bairro}`,
-        20,
-        232
-    );
+            const descricao = pdf.splitTextToSize(
+                `Descrição: ${pet.descricao}`,
+                170
+            );
 
-    pdf.text(
-        `Perdido em: ${pet.dataPerda}`,
-        20,
-        242
-    );
+            pdf.text(descricao, 20, 235);
 
-    // DESCRIÇÃO
-    pdf.setFontSize(14);
+            pdf.setTextColor(74, 144, 226);
+            pdf.setFont("helvetica", "bold");
 
-    const descricao = pdf.splitTextToSize(
-        `Descrição: ${pet.descricao}`,
-        170
-    );
+            pdf.text(
+                `Contato: ${pet.telefone}`,
+                20,
+                275
+            );
 
-    pdf.text(descricao, 20, 252);
-
-    // CONTATO
-    pdf.setTextColor(74,144,226);
-    pdf.setFont("helvetica","bold");
-    pdf.setFontSize(16);
-
-    pdf.text(
-        `Contato: ${pet.telefone}`,
-        20,
-        275
-    );
-
-    // RODAPÉ
-    pdf.setFontSize(12);
-    pdf.setTextColor(120,120,120);
-
-    pdf.text(
-        "Ajude este pet a voltar para casa!",
-        105,
-        290,
-        { align: "center" }
-    );
-
-    pdf.save(`${pet.nome}-cartaz.pdf`);
-}
-
-// ===============================
-// REMOVER
-// ===============================
-function removerPet(index){
-
-    let pets = JSON.parse(localStorage.getItem("pets")) || [];
-
-    const user = getUserLogado();
-
-    const meusPets = pets.filter(
-        pet => pet.usuario === user?.email
-    );
-
-    const petSelecionado = meusPets[index];
-
-    const confirmar = confirm(
-        "Deseja remover este pet?"
-    );
-
-    if(confirmar){
-
-        const novosPets = pets.filter(p =>
-            !(p.nome === petSelecionado.nome &&
-              p.telefone === petSelecionado.telefone &&
-              p.dataPerda === petSelecionado.dataPerda)
-        );
-
-        localStorage.setItem(
-            "pets",
-            JSON.stringify(novosPets)
-        );
-
-        mostrarPets();
+            pdf.save(`${pet.nome}-cartaz.pdf`);
+        })
+        .catch(error => {
+            console.error(error);
+            alert("Erro ao gerar PDF");
+        });
     }
-}
-
-
-// ===============================
+        // ===============================
 // LOGOUT
 // ===============================
-function logout(){
-
+function logout() {
     localStorage.removeItem("currentUser");
 
     alert("Logout realizado com sucesso!");
 
-    if(window.location.pathname.includes("/pages/")){
-
-        window.location.href = "../login.html";
-
-    }else{
-
-        window.location.href = "login.html";
-    }
+    window.location.href = "/login.html";
 }
+//dificuldade para acertar o caminho, já que estava na raiz
